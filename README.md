@@ -4,7 +4,7 @@ Welcome to NanStats; a Python wrapper around the Nanigans Reporting API 2.0.
 
 ## Basic Usage
 
-Replace credentials in config
+* Replace access token in config
 
 ```python
 >>> import nanigans
