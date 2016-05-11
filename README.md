@@ -2,19 +2,19 @@
 
 Welcome to NanStats; a Python wrapper around the Nanigans Reporting API 2.0. 
 
-# Basic Usage
+## Basic Usage
 
 Replace credentials in config
 
 ```python
 >>> import nanigans
->>> view = nanigans.get_adhoc_view('XXXXX', 'placements', ['budgetPool'], ['impressions','clicks'], '2016-01-01', '2016-01-31')
+>>> view = nanigans.get_adhoc_view('XXXXX', 'placements', ['budgetPool'], ['impressions'], '2016-01-01', '2016-01-31')
 >>> view.ok
 True
 >>> print(view)
 <Nanigans Response [OK]>
 >>> view.data
-[{'date': '2016-05-09', 'impressions': '0', 'budgetPool': 'A', 'clicks': '0'},...]
+[{'date': '2016-05-09', 'impressions': '0', 'budgetPool': 'A'},...]
 ```
 
 ## Acknowledgements
