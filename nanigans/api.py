@@ -75,13 +75,7 @@ def get_view(site, source, view, format='json'):
 	return response 
 
 
-def get_adhoc_view(site, 
-				   source,
-				   attributes=None,
-				   metrics=None,
-				   start=None,
-				   end=None,
-				   format='json'):
+def get_adhoc_view(site, source,attributes=None,metrics=None,start=None,end=None,format='json'):
 
 	"""Retrieves specific data requested given set of parameters.
 
