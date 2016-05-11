@@ -8,7 +8,7 @@ Replace credentials in config
 
 ```python
 >>> import nanigans
->>> view = nanigans.get_adhoc_view('XXXXX', 'placements', ['budgetPool'], ['impressions'], '2016-01-01', '2016-01-31')
+>>> view = nanigans.get_adhoc_view('XXXXX', 'placements', ['budgetPool'], ['impressions'])
 >>> view.ok
 True
 >>> print(view)
