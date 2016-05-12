@@ -94,7 +94,7 @@ class Adapter(object):
 		try:
 			resp_json = resp.json()
 		except:
-			self._errors([resp.text])
+			self._errors.extend([resp.text])
 			return Response(self._data, self._errors)
 		if resp.status_code == 200:
 			if resp_json['success']:

@@ -69,7 +69,7 @@ def get_view(site, source, view, format='json'):
 	return response 
 
 
-def get_adhoc_view(site, source, attributes=None, metrics=None, start=None, end=None, format='json'):
+def get_stats(site, source, attributes=None, metrics=None, start=None, end=None, format='json'):
 	"""Retrieves specific data requested given set of parameters.
 
 	Endpoint:
@@ -107,7 +107,7 @@ def get_adhoc_view(site, source, attributes=None, metrics=None, start=None, end=
 					  'attributes[]=':attributes,
 					  'start':day,
 					  'end':day,
-					  'depth':0}
+					  'depth':5}
 
 		request = PreparedRequest('adhoc', required_fields, parameters)
 		response += request.send()
