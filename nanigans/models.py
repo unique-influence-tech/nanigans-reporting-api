@@ -55,7 +55,6 @@ class PreparedRequest(object):
 	
 
 class Adapter(object):
-
 	"""' The <Nanigans Adapter [Reporting API]>' object is responsible for 
 	managing requests to the Nanigans API 2.0. 
 
@@ -147,7 +146,6 @@ class Adapter(object):
 
 
 class Response(object):
-
     """ A '<Nanigans Response [status]>' object.
 
     The '<Nanigans Response [status]>' object is a carrier of information

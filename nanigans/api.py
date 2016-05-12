@@ -5,7 +5,7 @@ from .utils import generate_date_range
 from .models import PreparedRequest, Adapter, Response
 
 
-def get_timeRanges(site, source):
+def get_timeranges(site, source):
 	"""Retrieves available time ranges for given data source.
 
 	Endpoint:
@@ -15,8 +15,7 @@ def get_timeRanges(site, source):
 	:param source: str, dataSource field 
 	"""
 	
-	required_fields = {'site':site, 
-					  'source':source}
+	required_fields = {'site':site, 'source':source}
 	response = PreparedRequest('timeranges', required_fields).send()
 
 	return response
@@ -32,8 +31,7 @@ def get_attributes(site, source):
 	:param source: str, dataSource field 
 	"""
 	
-	required_fields = {'site':site, 
-					  'source':source}
+	required_fields = {'site':site, 'source':source}
 	response = PreparedRequest('attributes', required_fields).send()
 
 	return response
@@ -48,8 +46,7 @@ def get_metrics(site, source):
 	:param site: str, unique site id assigned by Nanigans
 	:param source: str, dataSource field 
 	"""
-	required_fields = {'site':site, 
-					  'source':source}
+	required_fields = {'site':site, 'source':source}
 	response = PreparedRequest('metrics', required_fields).send()
 
 	return response
@@ -66,17 +63,13 @@ def get_view(site, source, view, format='json'):
 	:param format: str, json
 	"""
 
-	required_fields = {'site':site, 
-					   'source':source,
-					   'view':view
-					   }
+	required_fields = {'site':site, 'source':source, 'view':view}
 	request = PreparedRequest('view', required_fields)
 		
 	return response 
 
 
-def get_adhoc_view(site, source,attributes=None,metrics=None,start=None,end=None,format='json'):
-
+def get_adhoc_view(site, source, attributes=None, metrics=None, start=None, end=None, format='json'):
 	"""Retrieves specific data requested given set of parameters.
 
 	Endpoint:
@@ -90,12 +83,14 @@ def get_adhoc_view(site, source,attributes=None,metrics=None,start=None,end=None
 	:param end: str, end date in %Y-%m-%d format 
 	:param format: str, json 
 	"""
-
 	if isinstance(metrics, str):
 		metrics = [metrics]
-
+	if not metrics:
+		metrics = ['impressions','clicks','fbSpend']
 	if isinstance(attributes, str):
 		attributes = [attributes]
+	if not attributes:
+		attributes = ['budgetPool','strategyGroup','adPlan']
 
 	if start == None or end == None:
 		start = (date.today()-timedelta(days=7)).strftime('%Y-%m-%d')
@@ -103,16 +98,17 @@ def get_adhoc_view(site, source,attributes=None,metrics=None,start=None,end=None
 
 	dates = generate_date_range(start,end)
 	response = Response()
-	required_fields = {'site':site, 
-					  'source':source}
+	required_fields = {'site':site, 'source':source}
+
 	for day in dates:
+
 		parameters = {'format':format,
 					  'metrics[]=':metrics,
 					  'attributes[]=':attributes,
 					  'start':day,
 					  'end':day,
-					  'depth':2
-					 }
+					  'depth':0}
+
 		request = PreparedRequest('adhoc', required_fields, parameters)
 		response += request.send()
 
