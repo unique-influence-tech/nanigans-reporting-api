@@ -64,9 +64,9 @@ def get_view(site, source, view, format='json'):
 	"""
 
 	required_fields = {'site':site, 'source':source, 'view':view}
-	request = PreparedRequest('view', required_fields)
+	response = PreparedRequest('view', required_fields).send()
 		
-	return response 
+	return response
 
 
 def get_stats(site, source, attributes=None, metrics=None, start=None, end=None, format='json'):
@@ -83,7 +83,7 @@ def get_stats(site, source, attributes=None, metrics=None, start=None, end=None,
 	:param end: str, end date in %Y-%m-%d format 
 	:param format: str, json 
 	"""
-	
+
 	if isinstance(metrics, str):
 		metrics = [metrics]
 	if not metrics:
