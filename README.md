@@ -19,7 +19,7 @@ True
 
 ## Acknowledgements
 
-The foundations for this project are based on the work from [TwitterAds](https://github.com/essence-tech/twitter-ads-api), which I found to be a very nice interpretation of objects similar to those found in the [requests](http://docs.python-requests.org/en/latest/) library. 
+This library is an adapted version of [TwitterAds](https://github.com/essence-tech/twitter-ads-api), which I found to be a great model for building connectors to various Advertising API's. 
 
 
 
