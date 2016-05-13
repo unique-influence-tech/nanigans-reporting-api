@@ -83,6 +83,7 @@ def get_stats(site, source, attributes=None, metrics=None, start=None, end=None,
 	:param end: str, end date in %Y-%m-%d format 
 	:param format: str, json 
 	"""
+	
 	if isinstance(metrics, str):
 		metrics = [metrics]
 	if not metrics:
@@ -107,7 +108,7 @@ def get_stats(site, source, attributes=None, metrics=None, start=None, end=None,
 					  'attributes[]=':attributes,
 					  'start':day,
 					  'end':day,
-					  'depth':5}
+					  'depth':0}
 
 		request = PreparedRequest('adhoc', required_fields, parameters)
 		response += request.send()

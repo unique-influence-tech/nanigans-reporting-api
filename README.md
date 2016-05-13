@@ -8,7 +8,7 @@ Welcome to NanStats; a Python wrapper around the Nanigans Reporting API 2.0.
 
 ```python
 >>> import nanigans
->>> view = nanigans.get_adhoc_view('XXXXX', 'placements')
+>>> view = nanigans.get_stats('XXXXX', 'placements')
 >>> view.ok
 True
 >>> print(view)
