@@ -63,8 +63,11 @@ def get_view(site, source, view, format='json'):
 	:param format: str, json
 	"""
 
-	required_fields = {'site':site, 'source':source, 'view':view}
-	response = PreparedRequest('view', required_fields).send()
+	required_fields = {'site':site,
+					  'source':source,
+					  'view':view}
+	parameters = {'format':format,'depth':2}
+	response = PreparedRequest('view', required_fields, parameters).send()
 		
 	return response
 
@@ -108,7 +111,7 @@ def get_stats(site, source, attributes=None, metrics=None, start=None, end=None,
 					  'attributes[]=':attributes,
 					  'start':day,
 					  'end':day,
-					  'depth':0}
+					  'depth':2}
 
 		request = PreparedRequest('adhoc', required_fields, parameters)
 		response += request.send()
