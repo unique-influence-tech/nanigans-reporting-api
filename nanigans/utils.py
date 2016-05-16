@@ -1,7 +1,7 @@
 
 from datetime import datetime, timedelta
 
-def generate_date_range(start, end):
+def generate_dates(start, end):
 	"""Generates a list of string dates up to but not including 
 	the end date range.
 
@@ -23,26 +23,20 @@ def generate_date_range(start, end):
 
 	return dates
 
+def generate_date_chunks(start, end, size):
+	"""Generator to pass start and end dates given a start, end
+	and size of date range. 
 
+	:params start: str, Start date in YYYY-MM-DD format
+	:params end: str, End sate in YYYY-MM-DD format
+	:params size:, int, distance between date chunks
+	"""	
 
+	dates = generate_dates(start, end)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	for i in range(0, len(dates), size):
+		try:
+			yield (dates[i], dates[i+size])
+		except IndexError:
+			yield (dates[i], dates[len(dates)-1])
 

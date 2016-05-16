@@ -4,6 +4,7 @@ from ..structures import StringDescriptor, DictDescriptor, ListDescriptor
 
 
 # To test our descriptors, we need a class whose attributes are the descriptors.
+
 class Foo(object):
     bar = StringDescriptor()
     baz = DictDescriptor()

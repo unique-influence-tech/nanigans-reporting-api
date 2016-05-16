@@ -1,7 +1,7 @@
 
 
 from datetime import date, timedelta
-from .utils import generate_date_range
+from .utils import generate_dates
 from .models import PreparedRequest, Adapter, Response
 
 
@@ -97,7 +97,7 @@ def get_stats(site, source, attributes=None, metrics=None, start=None, end=None,
 		start = (date.today()-timedelta(days=7)).strftime('%Y-%m-%d')
 		end = (date.today()-timedelta(days=1)).strftime('%Y-%m-%d')
 
-	dates = generate_date_range(start,end)
+	dates = generate_dates(start,end)
 	response = Response()
 	required_fields = {'site':site, 'source':source}
 
