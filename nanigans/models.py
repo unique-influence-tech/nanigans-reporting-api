@@ -3,7 +3,7 @@ import time
 import json
 import requests
 
-from .config import CONFIG
+from .config import NAN_CONFIG
 from .structures import StringDescriptor, DictDescriptor, ListDescriptor
 
 class PreparedRequest(object):
@@ -138,7 +138,7 @@ class Adapter(object):
 	
 	@property
 	def params(self):
-		self.request.parameters['access_token'] = CONFIG['TOKEN']
+		self.request.parameters['access_token'] = NAN_CONFIG['TOKEN']
 		return self.request.parameters
 	
 	def __repr__(self):
