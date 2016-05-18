@@ -45,15 +45,15 @@ class MySQLReady:
 		query_greater = set(query_cols).difference(table_cols)
 
 		if not set(table_cols).intersection(query_cols):
-			raise ValueError('Not one single header matches your columns.')
+			raise ValueError('There are no matching columns.')
 
 		if set(table_cols)==set(query_cols):
 			return DataFrame(resp.data)
 		else:
 			if table_greater:
-				raise ValueError('# of table columns > # of Nanigans response headers')
+				raise ValueError('Table columns exceed response headers.')
 			if query_greater:
-				raise ValueError('# of Nanigans response headers > # of table columns')
+				raise ValueError('Response headers exceed table columns.')
 	
 
 			
