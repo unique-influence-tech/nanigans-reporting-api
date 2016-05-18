@@ -138,7 +138,7 @@ class Adapter(object):
 	
 	@property
 	def params(self):
-		self.request.parameters['access_token'] = NAN_CONFIG['TOKEN']
+		self.request.parameters['access_token'] = NAN_CONFIG['token']
 		return self.request.parameters
 	
 	def __repr__(self):

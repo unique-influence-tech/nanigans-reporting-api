@@ -8,7 +8,6 @@ def connect_to_database():
 	a specific database specified in users config.
 
 	"""
-
 	connection = connect(
 		host=DATABASE_CONFIG['host'],
 		user=DATABASE_CONFIG['user'],
@@ -24,7 +23,6 @@ def get_table_columns(table):
 
 	:params: str, table name to retrieve columns
 	"""
-
 	query = "show columns from {}".format(table)
 	connection = connect_to_database()
 	cursor = connection.cursor()
@@ -41,7 +39,6 @@ def mysql_dataframe_insert(data):
 
 	:params: pandas.DataFrame object, data to insert/insert-replace
 	"""
-
 	connection = connect_to_database()
 	cursor = connection.cursor()
 

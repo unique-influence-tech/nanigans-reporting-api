@@ -1,7 +1,5 @@
 
-
 from .decorators import MySQLReady
-from .db_utils import replace_into
 from datetime import date, timedelta
 from .utils import generate_dates
 from .models import PreparedRequest, Adapter, Response
@@ -74,5 +72,6 @@ def get_stats(site, source, attributes=None, metrics=None, start=None, end=None,
 		response += request.send()
 
 	return response 
+
 
 

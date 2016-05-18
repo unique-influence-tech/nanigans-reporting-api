@@ -1,4 +1,13 @@
+"""
+The .api module contains the core methods used to retrieve data from Nanigans:
 
+	.get_timeranges:: used to retrieve built-in time range for data sources
+	.get_attributes:: used to retrieve all dimensions available for data source
+	.get_metrics:: used to retrieve all metrics available for data source
+	.get_view:: used to retrieve a specific view created in the Nanigans interface
+	.get_stats:: used to retrieve data for user-defined queries
+
+"""
 
 from datetime import date, timedelta
 from .utils import generate_dates
