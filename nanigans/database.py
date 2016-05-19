@@ -1,7 +1,9 @@
 
+
 from .decorators import MySQLReady
 from datetime import date, timedelta
 from .utils import generate_dates
+from .db_utils import mysql_dataframe_insert
 from .models import PreparedRequest, Adapter, Response
 
 
@@ -16,14 +18,12 @@ def get_view(site, source, view, format='json'):
 	:param source: str, dataSource field 
 	:param view: str, view id of created view
 	:param format: str, json
-	"""
 
-	required_fields = {'site':site,
-					  'source':source,
-					  'view':view}
-	parameters = {'format':format,'depth':2}
+	"""
+	required_fields = {'site':site,'source':source,'view':view}
+	parameters = {'format':format,'depth':0}
 	response = PreparedRequest('view', required_fields, parameters).send()
-		
+
 	return response
 
 @MySQLReady
@@ -40,8 +40,8 @@ def get_stats(site, source, attributes=None, metrics=None, start=None, end=None,
 	:param start: str, start date in %Y-%m-%d format 
 	:param end: str, end date in %Y-%m-%d format 
 	:param format: str, json 
-	"""
 
+	"""
 	if isinstance(metrics, str):
 		metrics = [metrics]
 	if not metrics:
@@ -66,12 +66,53 @@ def get_stats(site, source, attributes=None, metrics=None, start=None, end=None,
 					  'attributes[]=':attributes,
 					  'start':day,
 					  'end':day,
-					  'depth':2}
+					  'depth':0}
 
 		request = PreparedRequest('adhoc', required_fields, parameters)
 		response += request.send()
 
 	return response 
+
+
+def import_stats(site, source, attributes=None, metrics=None, start=None, end=None, table):
+	"""Import a stats retreival directly to a MySQL table.
+
+	:params site: str, site id 
+	:params source: str, data source
+	:params attributes: list/str, dimensions of the data
+	:params metrics: list/str, metrics of the data
+	:params start: str, start date in YYYY-MM-DD format
+	:params end: str, end date in YYYY-MM-DD format
+	:params table: str, target table 
+
+	"""
+
+	data = get_stats(site, 
+					 source, 
+					 attributes=None, 
+					 metrics=None, 
+					 start=None, 
+					 end=None, 
+					 'json')
+
+	return mysql_dataframe_insert(data)
+
+
+def import_view(site, source, view, table):
+	"""Import a view directly to a MySQL table.
+	
+	:params site: str, site id 
+	:params source: str, data source
+	:params view: str, user-created view in interface
+	:params table: str, target table 
+
+	"""
+
+	data = get_view(site, source, view, 'json')
+
+	return mysql_dataframe_insert(data)
+
+
 
 
 

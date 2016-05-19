@@ -23,11 +23,12 @@ def get_table_columns(table):
 
 	:params: str, table name to retrieve columns
 	"""
-	query = "show columns from {}".format(table)
 	connection = connect_to_database()
 	cursor = connection.cursor()
+	query = "show columns from {}".format(table)
+
 	cursor.execute(query)
-	columns = [col for col in cursor.fetchall()]
+	columns = [col[0].lower() for col in cursor.fetchall()]
 	connection.close()
 
 	return columns 
