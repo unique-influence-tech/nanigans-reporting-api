@@ -4,7 +4,7 @@ Welcome to NanStats; a Python wrapper around the Nanigans Reporting API 2.0.
 
 ## Basic Usage
 
-* Replace '' with Access Token provided by Nanigans
+* Add access token provided by Nanigans to config
 
 ```python
 >>> import nanigans
@@ -21,7 +21,7 @@ True
 
 I've provided some MySQL database stats methods that check the current query against the columns of a target import table.
 
-* Replace the DATABASE values in config.py with your own. 
+* Add database credentials to config  
 
 ```
 @MySQLReady
