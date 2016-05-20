@@ -19,9 +19,7 @@ True
 
 ## Minimal Database Support
 
-I've provided some MySQL database stats methods that check the current query against the columns of a target import table.
-
-* Add database credentials to config  
+I've provided some MySQL database stats methods that verify whether your query can be imported into a given table:
 
 ```
 @MySQLReady
@@ -31,6 +29,14 @@ def get_view(site, source, view, format='json'):
 @MySQLReady
 def get_view(site, source, view, format='json'):
 	...
+```
+
+Returns one of three errors:
+
+```
+raise ValueError('Table columns exceed response headers.')
+raise ValueError('Response headers exceed table columns.')
+raise ValueError('There are no matching columns.')
 ```
 
 ## Acknowledgements
