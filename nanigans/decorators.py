@@ -1,5 +1,5 @@
 
-from .db_utils import get_table_columns
+from .utils.database import get_table_columns
 from pandas import DataFrame
 
 
@@ -39,8 +39,9 @@ class MySQLReady:
 							 'json')
 
 		query_cols = [key.lower() for key in resp.data[0].keys()]
-		query_greater = set(query_cols).difference(table_cols)
 		table_cols = get_table_columns(kwargs.get('table'))
+		
+		query_greater = set(query_cols).difference(table_cols)
 		table_greater = set(table_cols).difference(query_cols)
 
 		if table_greater:
@@ -51,6 +52,8 @@ class MySQLReady:
 			raise ValueError('There are no matching columns.')
 		if set(table_cols)==set(query_cols):
 			return DataFrame(resp.data)
+
+
 
 	
 
