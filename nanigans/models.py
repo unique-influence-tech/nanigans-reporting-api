@@ -91,6 +91,7 @@ class Adapter(object):
 	
 	def get(self):
 		resp = requests.get(url=self.endpoint, params=self.params)
+		print(resp.url)
 		try:
 			resp_json = resp.json()
 		except:
@@ -139,6 +140,8 @@ class Adapter(object):
 	@property
 	def params(self):
 		self.request.parameters['access_token'] = NAN_CONFIG['token']
+		if self.request.resource == 'adhoc':
+			self.request.parameters['timeRange'] = 'custom'
 		return self.request.parameters
 	
 	def __repr__(self):

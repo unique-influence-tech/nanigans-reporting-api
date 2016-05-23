@@ -8,7 +8,7 @@ from .models import PreparedRequest, Adapter, Response
 
 
 @MySQLReady
-def get_view(site, source, view, format='json'):
+def get_view(site, source, view, depth=0, format='json'):
 	"""Retrieves data for a specific view id. 
 
 	Endpoint:
@@ -21,13 +21,13 @@ def get_view(site, source, view, format='json'):
 
 	"""
 	required_fields = {'site':site,'source':source,'view':view}
-	parameters = {'format':format,'depth':0}
+	parameters = {'format':format,'depth':depth}
 	response = PreparedRequest('view', required_fields, parameters).send()
 
 	return response
 
 @MySQLReady
-def get_stats(site, source, attributes=None, metrics=None, start=None, end=None, format='json'):
+def get_stats(site, source, attributes=None, metrics=None, start=None, end=None, depth=0, format='json'):
 	"""Retrieves specific data requested given set of parameters.
 
 	Endpoint:

@@ -60,7 +60,7 @@ def get_metrics(site, source):
 
 	return response
 
-def get_view(site, source, view, format='json'):
+def get_view(site, source, view, depth=0, format='json'):
 	"""Retrieves data for a specific view id. 
 
 	Endpoint:
@@ -73,13 +73,13 @@ def get_view(site, source, view, format='json'):
 	"""
 
 	required_fields = {'site':site,'source':source,'view':view}
-	parameters = {'format':format,'depth':0}
+	parameters = {'format':format,'depth':depth}
 	response = PreparedRequest('view', required_fields, parameters).send()
 		
 	return response
 
 
-def get_stats(site, source, attributes=None, metrics=None, start=None, end=None, format='json'):
+def get_stats(site, source, attributes=None, metrics=None, start=None, end=None, depth=0, format='json'):
 	"""Retrieves specific data requested given set of parameters.
 
 	Endpoint:
@@ -118,7 +118,7 @@ def get_stats(site, source, attributes=None, metrics=None, start=None, end=None,
 					  'attributes[]=':attributes,
 					  'start':day,
 					  'end':day,
-					  'depth':0}
+					  'depth':depth}
 
 		request = PreparedRequest('adhoc', required_fields, parameters)
 		response += request.send()

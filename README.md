@@ -1,6 +1,6 @@
 # NanStats
 
-Welcome to NanStats; a Python wrapper around the Nanigans Reporting API 2.0. 
+Welcome to NanStats; a Python adapter for the Nanigans Reporting API 2.0. 
 
 ## Basic Usage
 
@@ -19,24 +19,16 @@ True
 
 ## Minimal Database Support
 
-I've provided some MySQL database stats methods that verify whether your query can be imported into a given table:
+I've provided decorators to check if response can be imported into a MySQL table.
 
 ```
 @MySQLReady
-def get_view(site, source, view, format='json'):
+def get_view(site, source, view, depth format='json'):
 	...
 
 @MySQLReady
-def get_view(site, source, view, format='json'):
+def get_view(site, source, view, depth, format='json'):
 	...
-```
-
-Returns one of three errors:
-
-```
-raise ValueError('Table columns exceed response headers.')
-raise ValueError('Response headers exceed table columns.')
-raise ValueError('There are no matching columns.')
 ```
 
 ## Acknowledgements

@@ -14,8 +14,7 @@ class MySQLReady:
 	
 	When these return a json response, MySQLReady checks that the response
 	headers match the target table's columns. If successful, it returns the 
-	response data in a pandas.DataFrame object else raises ValueError specifying
-	why column/headers do not match.
+	response data else raises ValueError specifying why column/headers do not match.
 	
 	"""
 	def __init__(self, F):
@@ -27,6 +26,7 @@ class MySQLReady:
 			resp = self.func(kwargs.get('site'),
 							 kwargs.get('source'),
 							 kwargs.get('view'),
+							 kwargs.get('depth'),
 							 'json')
 
 		if self.func.__name__ == 'get_stats':
@@ -40,18 +40,21 @@ class MySQLReady:
 
 		query_cols = [key.lower() for key in resp.data[0].keys()]
 		table_cols = get_table_columns(kwargs.get('table'))
-		
-		query_greater = set(query_cols).difference(table_cols)
-		table_greater = set(table_cols).difference(query_cols)
 
-		if table_greater:
-			raise ValueError('Table columns exceed response headers.')
-		if query_greater:
-			raise ValueError('Response headers exceed table columns.')
-		if not set(table_cols).intersection(query_cols):
-			raise ValueError('There are no matching columns.')
-		if set(table_cols)==set(query_cols):
-			return DataFrame(resp.data)
+		if (len(query_cols) < len(table_cols)):
+			diff = set(table_cols).difference(query_cols)
+			error = 'MySQL fields {} not found in response headers.'.format(diff)
+			raise ValueError(error)
+		if (len(query_cols) > len(table_cols)):
+			diff = set(query_cols).difference(table_cols)
+			error = ' Response headers {} do not exist in MySQL Table.'.format(diff)
+			raise ValueError(error)
+		if (len(query_cols) == len(table_cols)):
+			if set(table_cols)==set(query_cols):
+				return resp
+			raise ValueError('Same length, but columns don\'t match.')
+
+
 
 
 
