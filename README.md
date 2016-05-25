@@ -23,7 +23,7 @@ I've provided decorators to check if response can be imported into a MySQL table
 
 ```
 @MySQLReady
-def get_view(site, source, view, depth format='json'):
+def get_view(site, source, view, depth, format='json'):
 	...
 
 @MySQLReady
