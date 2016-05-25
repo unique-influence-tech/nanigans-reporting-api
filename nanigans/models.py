@@ -84,14 +84,17 @@ class Adapter(object):
 
 
 	def __init__(self, PreparedRequest):
-	
 		self._request = PreparedRequest
 		self._data = []
 		self._errors = []
-	
+		
+		self.request.parameters['access_token'] = NAN_CONFIG['token']
+		self.request.parameters['format'] = 'json'
+		if self.request.resource == 'adhoc':
+			self.request.parameters['timeRange'] = 'custom'
+
 	def get(self):
 		resp = requests.get(url=self.endpoint, params=self.params)
-		print(resp.url)
 		try:
 			resp_json = resp.json()
 		except:
@@ -116,22 +119,22 @@ class Adapter(object):
 	@property
 	def endpoint(self):
 		if self.request.resource == 'view':
-			return self._views_endpoint.format(self.request.required_fields['site'],\
+			return self._views_endpoint.format(NAN_CONFIG['site'],\
 				self.request.required_fields['source'], self.request.required_fields['view'])
 		if self.request.resource == 'adhoc':
-			return self._adhoc_endpoint.format(self.request.required_fields['site'],\
+			return self._adhoc_endpoint.format(NAN_CONFIG['site'],\
 				self.request.required_fields['source'])
 		if self.request.resource == 'attributes':
-			return self._attrs_endpoint.format(self.request.required_fields['site'],\
+			return self._attrs_endpoint.format(NAN_CONFIG['site'],\
 				self.request.required_fields['source'])
 		if self.request.resource == 'metrics':
-			return self._metrics_endpoint.format(self.request.required_fields['site'],\
+			return self._metrics_endpoint.format(NAN_CONFIG['site'],\
 				self.request.required_fields['source'])
 		if self.request.resource == 'timeranges':
-			return self._timeranges_endpoint.format(self.request.required_fields['site'],\
+			return self._timeranges_endpoint.format(NAN_CONFIG['site'],\
 				self.request.required_fields['source'])
 		if self.request.resource == 'datasources':
-			return self._datasource_endpoint.format(self.request.required_fields['site'],\
+			return self._datasource_endpoint.format(NAN_CONFIG['site'],\
 				self.request.required_fields['source'])
 		if self.request.resource == 'events':
 			return self._events_endpoint
@@ -139,9 +142,6 @@ class Adapter(object):
 	
 	@property
 	def params(self):
-		self.request.parameters['access_token'] = NAN_CONFIG['token']
-		if self.request.resource == 'adhoc':
-			self.request.parameters['timeRange'] = 'custom'
 		return self.request.parameters
 	
 	def __repr__(self):

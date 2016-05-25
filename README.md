@@ -5,10 +5,13 @@ Welcome to NanStats; a Python adapter for the Nanigans Reporting API 2.0.
 ## Basic Usage
 
 * Add access token provided by Nanigans to config
+* Add site id provided by Nanigans
+
+Get **Facebook** ads data:
 
 ```python
 >>> import nanigans
->>> view = nanigans.get_stats('XXXXX', 'placements')
+>>> view = nanigans.facebook.get_stats()
 >>> view.ok
 True
 >>> print(view)
@@ -17,19 +20,30 @@ True
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
-## Minimal Database Support
+Get **multi-channel** ads data (e.g. Twitter, Facebook, Instagram):
 
-I've provided decorators to check if response can be imported into a MySQL table.
-
+```python
+>>> import nanigans
+>>> view = nanigans.multichannel.get_stats()
+>>> view.ok
+True
+>>> print(view)
+<Nanigans Response [OK]>
+>>> view.data
+[{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
-@MySQLReady
-def get_view(site, source, view, depth, format='json'):
-	...
 
-@MySQLReady
-def get_view(site, source, view, depth, format='json'):
-	...
+Get **publishers** data (e.g. MoPub):
+
+```python
+>>> import nanigans
+>>> view = nanigans.publishers.get_stats()
+>>> view.ok
+True
+>>> print(view)
+<Nanigans Response [OK]>
 ```
+
 
 ## Acknowledgements
 

@@ -3,9 +3,8 @@ Nanigans Reporting API
 
 """
 
-from .database import get_view, get_stats
-from .api import get_view, get_stats,\
-	get_attributes, get_metrics, get_timeranges
+#from .database import get_view, get_stats
+from .api import facebook, multichannel, publishers
 from .models import PreparedRequest
 
 
