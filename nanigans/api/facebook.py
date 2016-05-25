@@ -11,7 +11,7 @@ ads data from Nanigans:
 """
 
 from datetime import date, timedelta
-from ..utils.utils import generate_dates
+from ..utils import generate_dates
 from ..models import PreparedRequest, Adapter, Response
 
 

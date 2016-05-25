@@ -1,5 +1,6 @@
 """
-The .api module contains the core methods used to retrieve data from Nanigans:
+The .api module contains the core methods used to retrieve publisher data from Nanigans 
+(e.g. MoPub):
 
 	.get_timeranges:: used to retrieve built-in time range for data sources
 	.get_attributes:: used to retrieve all dimensions available for data source
@@ -10,7 +11,7 @@ The .api module contains the core methods used to retrieve data from Nanigans:
 """
 
 from datetime import date, timedelta
-from ..utils.utils import generate_dates
+from ..utils import generate_dates
 from ..models import PreparedRequest, Adapter, Response
 
 
