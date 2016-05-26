@@ -3,7 +3,7 @@ import unittest
 from mock import patch
 from random import randint
 
-from ..api import get_attributes, get_metrics, get_timeranges, get_view, get_stats
+from ..api import facebook, multichannel, publishers
 from ..models import Response
 
 
@@ -13,8 +13,12 @@ class GetTimeRangesTests(unittest.TestCase):
         site = randint(100000, 999999)
         source = 'dummmySource'
         mock_send.return_value = Response()
-        timeranges = get_timeranges(site,source)
-        self.assertIsInstance(timeranges, Response)
+        fb = facebook.get_timeranges()
+        mc = multichannel.get_timeranges()
+        pub = publishers.get_timeranges()
+        self.assertIsInstance(fb, Response)
+        self.assertIsInstance(mc, Response)
+        self.assertIsInstance(pub, Response)
 
 class GetAttributesTests(unittest.TestCase):
     @patch('nanigans.models.Adapter.get')
@@ -22,8 +26,12 @@ class GetAttributesTests(unittest.TestCase):
         site = randint(100000, 999999)
         source = 'dummmySource'
         mock_send.return_value = Response()
-        attributes = get_attributes(site,source)
-        self.assertIsInstance(attributes, Response)
+        fb = facebook.get_attributes()
+        mc = multichannel.get_attributes()
+        pub = publishers.get_attributes()
+        self.assertIsInstance(fb, Response)
+        self.assertIsInstance(mc, Response)
+        self.assertIsInstance(pub, Response)
 
 class GetMetricsTests(unittest.TestCase):
     @patch('nanigans.models.Adapter.get')
@@ -31,8 +39,12 @@ class GetMetricsTests(unittest.TestCase):
         site = randint(100000, 999999)
         source = 'dummmySource'
         mock_send.return_value = Response()
-        metrics = get_metrics(site,source)
-        self.assertIsInstance(metrics, Response)
+        fb = facebook.get_metrics()
+        mc = multichannel.get_metrics()
+        pub = publishers.get_metrics()
+        self.assertIsInstance(fb, Response)
+        self.assertIsInstance(mc, Response)
+        self.assertIsInstance(pub, Response)
 
 class GetViewTests(unittest.TestCase):
     @patch('nanigans.models.Adapter.get')
@@ -41,8 +53,12 @@ class GetViewTests(unittest.TestCase):
         source = 'dummmySource'
         view = randint(10000, 99999)
         mock_send.return_value = Response()
-        view = get_view(site,source,view)
-        self.assertIsInstance(view, Response)
+        fb = facebook.get_view(view)
+        mc = multichannel.get_view(view)
+        pub = publishers.get_view(view)
+        self.assertIsInstance(fb, Response)
+        self.assertIsInstance(mc, Response)
+        self.assertIsInstance(pub, Response)
 
 class GetStatsTests(unittest.TestCase):
     @patch('nanigans.models.Adapter.get')
@@ -50,10 +66,12 @@ class GetStatsTests(unittest.TestCase):
         site = randint(100000, 999999)
         source = 'dummmySource'
         mock_send.return_value = Response()
-        stats = get_stats(site,source)
-        self.assertIsInstance(stats, Response)
-
-    def test_get_stats()
+        fb = facebook.get_stats()
+        mc = multichannel.get_stats()
+        pub = publishers.get_stats()
+        self.assertIsInstance(fb, Response)
+        self.assertIsInstance(mc, Response)
+        self.assertIsInstance(pub, Response)
 
 
 if __name__ == "__main__":
@@ -67,4 +85,4 @@ if __name__ == "__main__":
 
     for test_case in test_cases:
         suite = unittest.TestLoader().loadTestsFromTestCase(test_case)
-        unittest.TextTestRunner(verbosity=5).run(suite)
+        unittest.TextTestRunner(verbosity=1).run(suite)

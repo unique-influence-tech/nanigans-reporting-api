@@ -25,7 +25,7 @@ def generate_dates(start, end):
 
 def generate_date_chunks(start, end, size):
 	"""Generator to pass start and end dates given a start, end
-	and size of date range. 
+	and length of date range. 
 
 	:params start: str, Start date in YYYY-MM-DD format
 	:params end: str, End sate in YYYY-MM-DD format

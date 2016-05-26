@@ -1,7 +1,7 @@
 import unittest
 
 from datetime import datetime, timedelta
-from ..utils import generate_date_range
+from ..utils import generate_dates, generate_date_chunks
 
 
 class GenerateDateRangeTests(unittest.TestCase):
@@ -38,8 +38,58 @@ class GenerateDateRangeTests(unittest.TestCase):
         self.assertEqual(desired_end_date_output, output[0])
 
 
+class GenerateDateChunksTest(unittest.TestCase):
+
+    start = '2016-01-01'
+    end = '2016-06-01'
+    length1 = 1
+    length2 = 10
+    length3 = 25
+    length4 = 31
+
+    def test_generate_date_chunks_1(self):
+        generator = generate_date_chunks(self.start, self.end, self.length1)
+        output = [dates for dates in generator]
+        diff = datetime.strptime(self.end, '%Y-%m-%d')-datetime.strptime(self.start, '%Y-%m-%d')
+        check = divmod(diff.days, self.length1)
+        if check[1] == 0:
+            self.assertEqual(check[0],len(output))
+        else:
+            self.assertEqual(check[0]+1, len(output))
+
+    def test_generate_date_chunks_10(self):
+        generator = generate_date_chunks(self.start, self.end, self.length2)
+        output = [dates for dates in generator]
+        diff = datetime.strptime(self.end, '%Y-%m-%d')-datetime.strptime(self.start, '%Y-%m-%d')
+        check = divmod(diff.days, self.length2)
+        if check[1] == 0:
+            self.assertEqual(check[0],len(output))
+        else:
+            self.assertEqual(check[0]+1, len(output))
+
+    def test_generate_date_chunks_25(self):
+        generator = generate_date_chunks(self.start, self.end, self.length3)
+        output = [dates for dates in generator]
+        diff = datetime.strptime(self.end, '%Y-%m-%d')-datetime.strptime(self.start, '%Y-%m-%d')
+        check = divmod(diff.days, self.length3)
+        if check[1] == 0:
+            self.assertEqual(check[0],len(output))
+        else:
+            self.assertEqual(check[0]+1, len(output))
+
+    def test_generate_date_chunks_31(self):
+        generator = generate_date_chunks(self.start, self.end, self.length4)
+        output = [dates for dates in generator]
+        diff = datetime.strptime(self.end, '%Y-%m-%d')-datetime.strptime(self.start, '%Y-%m-%d')
+        check = divmod(diff.days, self.length4)
+        if check[1] == 0:
+            self.assertEqual(check[0],len(output))
+        else:
+            self.assertEqual(check[0]+1, len(output))
+           
+
 if __name__ == "__main__":
-    test_cases = [GenerateDateRangeTests]
+    test_cases = [GenerateDateRangeTests, GenerateDateChunksTest]
 
     for test_case in test_cases:
         suite = unittest.TestLoader().loadTestsFromTestCase(test_case)

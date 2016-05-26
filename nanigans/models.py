@@ -87,9 +87,10 @@ class Adapter(object):
 		self._request = PreparedRequest
 		self._data = []
 		self._errors = []
-		
+
+		# Required parameters that don't need to be repeatedly called in .parameters
 		self.request.parameters['access_token'] = NAN_CONFIG['token']
-		self.request.parameters['format'] = 'json'
+		self.request.parameters['format'] = 'json' 
 		if self.request.resource == 'adhoc':
 			self.request.parameters['timeRange'] = 'custom'
 
