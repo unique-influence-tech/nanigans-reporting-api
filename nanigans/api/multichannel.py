@@ -14,15 +14,11 @@ from datetime import date, timedelta
 from ..utils import generate_dates
 from ..models import PreparedRequest, Adapter, Response
 
-
 def get_timeranges():
 	"""Retrieves available time ranges for given data source.
 
 	Endpoint:
 	/sites/:siteId/datasources/componentplacementstimeRanges
-
-	:param site: str, unique site id assigned by Nanigans
-	:param source: str, dataSource field 
 	"""
 	
 	required_fields = {'source':'componentplacements'}
@@ -30,15 +26,11 @@ def get_timeranges():
 
 	return response
 
-
 def get_attributes():
 	"""Retrieves available attributes for given data source.
 
 	Endpoint:
 	/sites/:siteId/datasources/componentplacementsattributes
-
-	:param site: str, unique site id assigned by Nanigans
-	:param source: str, dataSource field 
 	"""
 	
 	required_fields = {'source':'componentplacements'}
@@ -46,15 +38,11 @@ def get_attributes():
 
 	return response
 
-
 def get_metrics():
 	"""Retrieves available metrics for given data source.
 
 	Endpoint:
 	/sites/:siteId/datasources/componentplacementsmetrics
-
-	:param site: str, unique site id assigned by Nanigans
-	:param source: str, dataSource field 
 	"""
 	
 	required_fields = {'source':'componentplacements'}
@@ -67,11 +55,8 @@ def get_view(view, depth=0):
 
 	Endpoint:
 	/sites/:siteId/datasources/componentplacementsviews/:viewId
-
-	:param site: str, unique site id assigned by Nanigans
-	:param source: str, dataSource field 
 	:param view: str, view id of created view
-	:param format: str, json
+	:param depth: int, dimensions depth of data
 	"""
 
 	required_fields = {'source':'componentplacements','view':view}
@@ -80,20 +65,17 @@ def get_view(view, depth=0):
 		
 	return response
 
-
 def get_stats(attributes=None, metrics=None, start=None, end=None, depth=0):
 	"""Retrieves specific data requested given set of parameters.
 
 	Endpoint:
 	/sites/:siteId/datasources/componentplacementsviews/adhoc
-
-	:param site: str, unique site id assigned by Nanigans
-	:param source: str, dataSource field 
-	:param metrics: list/str, metrics fields
+	
 	:param attributes: list/str, attributes fields 
+	:param metrics: list/str, metrics fields
 	:param start: str, start date in %Y-%m-%d format 
-	:param end: str, end date in %Y-%m-%d format 
-	:param format: str, json 
+	:param end: str, end date in %Y-%m-%d format
+	:param depth: int, dimensions depth of data
 	"""
 
 	if isinstance(metrics, str):

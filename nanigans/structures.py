@@ -1,7 +1,7 @@
 from weakref import WeakKeyDictionary
 
-
 class BaseDescriptor(object):
+
     def __init__(self):
         self.data = WeakKeyDictionary()
 
@@ -10,6 +10,7 @@ class BaseDescriptor(object):
 
  
 class StringDescriptor(BaseDescriptor):
+
     def __init__(self):
         super(StringDescriptor, self).__init__()
 
@@ -20,6 +21,7 @@ class StringDescriptor(BaseDescriptor):
 
 
 class DictDescriptor(BaseDescriptor):
+
     def __init__(self):
         super(DictDescriptor, self).__init__()
 
@@ -30,6 +32,7 @@ class DictDescriptor(BaseDescriptor):
 
 
 class ListDescriptor(BaseDescriptor):
+    
     def __init__(self):
         super(ListDescriptor, self).__init__()
 

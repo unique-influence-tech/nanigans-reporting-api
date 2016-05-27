@@ -1,6 +1,6 @@
 # NanStats
 
-Welcome to NanStats; a Python adapter for the Nanigans Reporting API 2.0. 
+Welcome to NanStats; a Python adapter for the Nanigans Reporting API. 
 
 ## Basic Usage
 
@@ -43,7 +43,6 @@ True
 >>> print(view)
 <Nanigans Response [OK]>
 ```
-
 
 ## Acknowledgements
 

@@ -36,9 +36,6 @@ def get_attributes():
 
 	Endpoint:
 	/sites/:siteId/datasources/placements/attributes
-
-	:param site: str, unique site id assigned by Nanigans
-	:param source: str, dataSource field 
 	"""
 
 	required_fields = {'source':'componentplacements'}
@@ -52,9 +49,6 @@ def get_metrics():
 
 	Endpoint:
 	/sites/:siteId/datasources/placements/metrics
-
-	:param site: str, unique site id assigned by Nanigans
-	:param source: str, dataSource field 
 	"""
 
 	required_fields = {'source':'placements'}
@@ -69,10 +63,8 @@ def get_view(view, depth=0):
 	Endpoint:
 	/sites/:siteId/datasources/placements/views/:viewId
 
-	:param site: str, unique site id assigned by Nanigans
-	:param source: str, dataSource field 
 	:param view: str, view id of created view
-	:param format: str, json
+	:param depth: int, dimension depth of data
 	"""
 
 	required_fields = {'source':'placements','view':view}
@@ -87,14 +79,12 @@ def get_stats(attributes=None, metrics=None, start=None, end=None, depth=0):
 
 	Endpoint:
 	/sites/:siteId/datasources/placements/views/adhoc
-
-	:param site: str, unique site id assigned by Nanigans
-	:param source: str, dataSource field 
-	:param metrics: list/str, metrics fields
+	
 	:param attributes: list/str, attributes fields 
+	:param metrics: list/str, metrics fields
 	:param start: str, start date in %Y-%m-%d format 
 	:param end: str, end date in %Y-%m-%d format 
-	:param format: str, json 
+	:param depth: int, dimension depth of data
 	"""
 
 	if isinstance(metrics, str):

@@ -89,6 +89,7 @@ class Adapter(object):
 		self._errors = []
 
 		# Required parameters that don't need to be repeatedly called in .parameters
+		
 		self.request.parameters['access_token'] = NAN_CONFIG['token']
 		self.request.parameters['format'] = 'json' 
 		if self.request.resource == 'adhoc':
