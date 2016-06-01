@@ -12,7 +12,7 @@ The .api module contains the core methods used to retrieve multi-channel data fr
 
 from datetime import date, timedelta
 from ..utils import generate_dates
-from ..models import PreparedRequest, Adapter, Response
+from ..models import PreparedRequest, Response
 
 def get_timeranges():
 	"""Retrieves available time ranges for given data source.

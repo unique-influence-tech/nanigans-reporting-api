@@ -1,6 +1,4 @@
 
-import time
-import json
 import requests
 
 from .config import NAN_CONFIG
@@ -97,6 +95,7 @@ class Adapter(object):
 
 	def get(self):
 		resp = requests.get(url=self.endpoint, params=self.params)
+		print(resp.url)
 		try:
 			resp_json = resp.json()
 		except:
@@ -140,7 +139,7 @@ class Adapter(object):
 				self.request.required_fields['source'])
 		if self.request.resource == 'events':
 			return self._events_endpoint
-		raise TypeError('Do not recognize type.')
+		raise TypeError('Do not recognize resource.')
 	
 	@property
 	def params(self):

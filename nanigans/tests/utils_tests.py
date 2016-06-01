@@ -1,14 +1,14 @@
 import unittest
 
-from datetime import datetime, timedelta
-from ..utils import generate_dates, generate_date_chunks
+from datetime import datetime
+from ..utils import generate_date_chunks, generate_dates
 
 
 class GenerateDateRangeTests(unittest.TestCase):
-    def test_generate_date_range_works(self):
+    def test_generate_dates_works(self):
         start = '2016-05-25'
         stop = '2016-06-05'
-        output = generate_date_range(start, stop)
+        output = generate_dates(start, stop)
         desired_end_date_output = '2016-06-04'
         desired_list_output = [
             '2016-06-04', 
@@ -27,10 +27,10 @@ class GenerateDateRangeTests(unittest.TestCase):
         self.assertEqual(desired_list_output.pop(), start)
         self.assertEqual(desired_end_date_output, output[0])
 
-    def test_generate_date_range_on_single_day(self):
+    def test_generate_dates_on_single_day(self):
         start = '2016-06-05'
         stop = '2016-06-06'
-        output = generate_date_range(start, stop)
+        output = generate_dates(start, stop)
         desired_end_date_output = '2016-06-05'
         desired_list_output = ['2016-06-05']
         self.assertEqual(output, desired_list_output)
