@@ -49,4 +49,3 @@ True
 This library is an adapted version of [TwitterAds](https://github.com/essence-tech/twitter-ads-api), which I found to be a great model for building connectors to various Advertising API's. 
 
 
-
