@@ -1,4 +1,4 @@
-
+import base64
 import requests
 
 from .config import NAN_CONFIG
@@ -31,7 +31,6 @@ class PreparedRequest(object):
 	:param filters: dict, similar to parameters will act to limit fields
 
 	"""
-
 	resource = StringDescriptor()
 	parameters = DictDescriptor()
 	required_fields = DictDescriptor()
@@ -69,7 +68,6 @@ class Adapter(object):
 	:param PreparedRequest: list, the entities provided by the resource.
 
 	"""
-
 	_base_endpoint = 'https://app.nanigans.com/reporting-api/sites/{0}'
 	_base_datasource_endpoint = _base_endpoint+'/datasources'
 	_views_endpoint = _base_datasource_endpoint+'/{1}/views/{2}'
@@ -80,22 +78,19 @@ class Adapter(object):
 	_datasource_endpoint = _base_endpoint+'/datasources'
 	_events_endpoint = _base_endpoint+'/events'
 
-
 	def __init__(self, PreparedRequest):
 		self._request = PreparedRequest
 		self._data = []
 		self._errors = []
 
 		# Required parameters that don't need to be repeatedly called in .parameters
-		
 		self.request.parameters['access_token'] = NAN_CONFIG['token']
 		self.request.parameters['format'] = 'json' 
 		if self.request.resource == 'adhoc':
 			self.request.parameters['timeRange'] = 'custom'
-
+	
 	def get(self):
 		resp = requests.get(url=self.endpoint, params=self.params)
-		print(resp.url)
 		try:
 			resp_json = resp.json()
 		except:
@@ -166,7 +161,6 @@ class Response(object):
     entities.
 
     """
-
     data = ListDescriptor()
     errors = ListDescriptor()
 

@@ -112,6 +112,8 @@ def get_stats(attributes=None, metrics=None, start=None, end=None, depth=0):
 					  'depth':depth}
 		request = PreparedRequest('adhoc', required_fields, parameters)
 		response += request.send()
+		if response.errors:
+			break
 
 	return response 
 

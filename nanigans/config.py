@@ -1,11 +1,8 @@
+from .utils import generate_token
 
-# Nanigans Reporting API 2.0 Configuration
+NAN_CONFIG = {'site':'',
+			  'username':'',
+			  'password':''}
 
-NAN_CONFIG = {'token':'', 
-			  'site':''}
-
-DATABASE_CONFIG = {'user':'', 
-				   'password':'', 
-				   'database':'',
-				   'host':''}
+NAN_CONFIG['token'] = generate_token(NAN_CONFIG['username'], NAN_CONFIG['password'], NAN_CONFIG['site'])
 
