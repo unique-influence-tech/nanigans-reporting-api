@@ -4,7 +4,6 @@ Welcome to NanStats; a Python adapter for the Nanigans Reporting API.
 
 ## Basic Usage
 
-* Add access token provided by Nanigans  
 * Add site id provided by Nanigans
 
 Get **Facebook** ads data:
