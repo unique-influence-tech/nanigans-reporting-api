@@ -2,11 +2,15 @@
 
 Welcome to NanStats; a Python adapter for the Nanigans Reporting API. 
 
-## Basic Usage
+## Single Site Usage
 
-* Add site id provided by Nanigans
+If you're managing a single site:
 
-Get **Facebook** ads data:
+* Add **username** to config
+* Add **password** to config
+* Add **site id** to config
+
+Start making requests:
 
 ```python
 >>> import nanigans
@@ -19,11 +23,40 @@ True
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
-Get **multi-channel** ads data (e.g. Twitter, Facebook, Instagram):
+## Multiple Site Usage 
+
+If you're managing multiple sites:
+
+* Add **username** to config
+* Add **password** to config
+
+You'll have the option to leave the **site id** blank or provide a default value.
+
+If you leave the **site id** in the config, you'll be asked to provide one:
 
 ```python
 >>> import nanigans
->>> view = nanigans.multichannel.get_stats()
+Add your site id:
+XXXXXXX
+```
+
+If you provided a **site id** and you want to request data from other sites, you can reassign:
+
+```python
+>>> import nanigans
+Add your site id:
+123456
+>>> nanigans.config.NAN_CONFIG
+{'username': 'fake@fake.com', 'token': u'fakeaccesstoken', 'password': 'pass', 'site': '123456'}
+>>> nanigans.reassign(123457)
+>>> nanigans.config.NAN_CONFIG
+{'username': 'fake@fake.com', 'token': u'fakeaccesstoken', 'password': 'pass', 'site': '123457'}
+```
+
+Start making requests:
+
+```python
+>>> view = nanigans.facebook.get_stats()
 >>> view.ok
 True
 >>> print(view)
@@ -32,16 +65,6 @@ True
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
-Get **publishers** data (e.g. MoPub):
-
-```python
->>> import nanigans
->>> view = nanigans.publishers.get_stats()
->>> view.ok
-True
->>> print(view)
-<Nanigans Response [OK]>
-```
 
 ## Acknowledgements
 

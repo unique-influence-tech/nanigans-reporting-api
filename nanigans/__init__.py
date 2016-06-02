@@ -4,7 +4,7 @@ Nanigans Reporting API
 """
 
 import sys
-from .utils import generate_token
+from .utils import generate_token, reassign_site
 from .config import NAN_CONFIG as credentials
 
 if sys.argv[0]:
@@ -27,9 +27,13 @@ else:
 		credentials['site']
 	)
 	from .api import facebook, multichannel, publishers
-	
-del generate_token
+
+# destructors to remove from namespace
+del generate_token 
 del sys
+del site
+del credentials
+
 
 
 

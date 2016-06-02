@@ -1,6 +1,7 @@
 import base64
 import requests
 
+from .config import NAN_CONFIG
 from datetime import datetime, timedelta
 
 def generate_dates(start, end):
@@ -59,6 +60,18 @@ def generate_token(user, password, site):
 	resp_json = resp.json()
 	return resp_json['token']
 
+def reassign_site(site):
+	"""Re assign site id and access token.
+
+	:params site: str/int, Nanigans site id
+	"""
+	NAN_CONFIG['site'] = str(site)
+	NAN_CONFIG['token'] = generate_token(
+		NAN_CONFIG['username'], 
+		NAN_CONFIG['password'], 
+		NAN_CONFIG['site']
+	)
+	return 
 
 
 
