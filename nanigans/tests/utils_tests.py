@@ -1,8 +1,10 @@
 import unittest
 import re
 
+from random import randint
 from datetime import datetime
-from ..utils import generate_date_chunks, generate_dates, generate_token
+from ..config import NAN_CONFIG as config 
+from ..utils import generate_date_chunks, generate_dates, generate_token, reassign
 
 
 class GenerateDateRangeTests(unittest.TestCase):
@@ -111,10 +113,22 @@ class GenerateTokenTests(unittest.TestCase):
         self.assertIsNone(expr.match(token2))
 
 class ReassignTests(unittest.TestCase):
-    pass
+    site = randint(10000, 99999)
+    
+    def test_reassign_changes_site(self):
+        before = config['site']
+        reassign(self.site)
+        after = config['site']
+        self.assertFalse(before==after)
+
+    def test_reassign_changes_token(self):
+        before = config['token']
+        reassign(self.site)
+        after = config['token']
+        self.assertFalse(before==after)
 
 if __name__ == "__main__":
-    test_cases = [GenerateDateRangeTests, GenerateDateChunksTest, GenerateTokenTests]
+    test_cases = [GenerateDateRangeTests, GenerateDateChunksTest, GenerateTokenTests, ReassignTests]
     for test_case in test_cases:
         suite = unittest.TestLoader().loadTestsFromTestCase(test_case)
         unittest.TextTestRunner(verbosity=5).run(suite)

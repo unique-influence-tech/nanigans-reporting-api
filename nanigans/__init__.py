@@ -9,7 +9,6 @@ Basic Usage:
 True
 
 """
-
 from .utils import generate_token, reassign
 from .config import NAN_CONFIG as temp_config
 
