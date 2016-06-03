@@ -1,7 +1,8 @@
 import unittest
+import re
 
 from datetime import datetime
-from ..utils import generate_date_chunks, generate_dates
+from ..utils import generate_date_chunks, generate_dates, generate_token
 
 
 class GenerateDateRangeTests(unittest.TestCase):
@@ -36,7 +37,6 @@ class GenerateDateRangeTests(unittest.TestCase):
         self.assertEqual(output, desired_list_output)
         self.assertEqual(desired_list_output.pop(), start)
         self.assertEqual(desired_end_date_output, output[0])
-
 
 class GenerateDateChunksTest(unittest.TestCase):
 
@@ -86,11 +86,35 @@ class GenerateDateChunksTest(unittest.TestCase):
             self.assertEqual(check[0],len(output))
         else:
             self.assertEqual(check[0]+1, len(output))
-           
+
+class GenerateTokenTests(unittest.TestCase):
+
+    test_user_1 = 'test@gmail.com'
+    test_user_2 = 'fake2@fake.com'
+    test_password_1 = 'test'
+    test_password_2 = 'fakepass2'
+    test_site_1 = '456789'
+    test_site_2 = '123456'
+
+    def test_generate_token_returns_token(self):
+        token1 = generate_token(self.test_user_1, self.test_password_1, self.test_site_1)
+        token2 = generate_token(self.test_user_2, self.test_password_2, self.test_site_2)
+        self.assertIsInstance(token1, str)
+        self.assertIsNone(token2)
+
+    def test_generate_token_returns_token_in_proper_format(self):
+        b64regex = '\w{8}-\w{4}-\w{4}-\w{4}-\w{12}'
+        expr = re.compile(b64regex)
+        token1 = generate_token(self.test_user_1, self.test_password_1, self.test_site_1)
+        token2 = 'this123!-sho7778uld-no8459t-match888'
+        self.assertIsNotNone(expr.match(token1))
+        self.assertIsNone(expr.match(token2))
+
+class ReassignTests(unittest.TestCase):
+    pass
 
 if __name__ == "__main__":
-    test_cases = [GenerateDateRangeTests, GenerateDateChunksTest]
-
+    test_cases = [GenerateDateRangeTests, GenerateDateChunksTest, GenerateTokenTests]
     for test_case in test_cases:
         suite = unittest.TestLoader().loadTestsFromTestCase(test_case)
         unittest.TextTestRunner(verbosity=5).run(suite)

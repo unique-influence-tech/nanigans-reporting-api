@@ -1,7 +1,7 @@
 import base64
 import requests
 
-from .config import NAN_CONFIG
+from .config import NAN_CONFIG as config
 from datetime import datetime, timedelta
 
 def generate_dates(start, end):
@@ -48,29 +48,31 @@ def generate_token(user, password, site):
 	:params password: str, password 
 	:params site: str, site id in Nanigans
 	"""
-	b64_un = base64.b64encode(user)
-	b64_pw = base64.b64encode(password)
+	b64_un = base64.b64encode(bytearray(user, 'utf-8'))
+	b64_pw = base64.b64encode(bytearray(password, 'utf-8'))
 	params = {'username':b64_un,
 			  'password':b64_pw,
 			  'scope':'site',
 			  'id':site}
-
+			  
 	url = 'https://app.nanigans.com/reporting-api/authenticate.php'
 	resp = requests.post(url=url, params=params)
 	resp_json = resp.json()
+
 	return resp_json['token']
 
-def reassign_site(site):
+def reassign(site):
 	"""Re assign site id and access token.
 
 	:params site: str/int, Nanigans site id
 	"""
-	NAN_CONFIG['site'] = str(site)
-	NAN_CONFIG['token'] = generate_token(
-		NAN_CONFIG['username'], 
-		NAN_CONFIG['password'], 
-		NAN_CONFIG['site']
+	config['site'] = str(site)
+	config['token'] = generate_token(
+		config['username'], 
+		config['password'], 
+		config['site']
 	)
+
 	return 
 
 

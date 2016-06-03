@@ -1,37 +1,38 @@
 """
 Nanigans Reporting API
 
+Basic Usage:
+
+>>> import nanigans
+>>> stats = nanigans.facebook.get_stats()
+>>> stats.ok
+True
+
 """
 
-import sys
-from .utils import generate_token, reassign_site
-from .config import NAN_CONFIG as credentials
+from .utils import generate_token, reassign
+from .config import NAN_CONFIG as temp_config
 
-if sys.argv[0]:
-	from .api import facebook, multichannel, publishers
-	credentials['token'] = generate_token(
-			credentials['username'], 
-			credentials['password'], 
-			credentials['site']
-		)
-	pass
-else:
-	if not credentials['site']:
-		print('Add your site id:')
-		site = str(input())
-		credentials['site'] = site
-	credentials['token'] = generate_token(
-		credentials['username'], 
-		credentials['password'], 
-		credentials['site']
+if not temp_config['site']:
+	print('Add your site id:')
+	site = str(input())
+	temp_config['site'] = site
+	temp_config['token'] = generate_token(
+		temp_config['username'], 
+		temp_config['password'], 
+		temp_config['site']
 	)
 	from .api import facebook, multichannel, publishers
-
-# destructors to remove from namespace
-del generate_token 
-del sys
-del site
-del credentials
+	del site
+else:
+	from .api import facebook, multichannel, publishers
+	temp_config['token'] = generate_token(
+		temp_config['username'], 
+		temp_config['password'], 
+		temp_config['site']
+	)
+del generate_token
+del temp_config
 
 
 
