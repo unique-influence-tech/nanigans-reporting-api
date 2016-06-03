@@ -14,7 +14,6 @@ if sys.argv[0]:
 			credentials['password'], 
 			credentials['site']
 		)
-	# command line stuff 
 	pass
 else:
 	if not credentials['site']:

@@ -8,8 +8,7 @@ Welcome to NanStats; a Python adapter for the Nanigans Reporting API.
 Project Goal
 ------------
 
-The target audience for this library are in-house data teams or agencices looking to automate data collection, perform impromptu analyses and or looking
-for a quick view on their advertising data.
+The target audience for this package are is in-house or agency data teams that need to interact with the Nanigans Reporting API. The adapter is designed to make requesting data simple and repeatable.
 
 ----------------
 Acknowledgements
