@@ -41,7 +41,6 @@ class GenerateDateRangeTests(unittest.TestCase):
         self.assertEqual(desired_end_date_output, output[0])
 
 class GenerateDateChunksTest(unittest.TestCase):
-
     start = '2016-01-01'
     end = '2016-06-01'
     length1 = 1
@@ -90,7 +89,6 @@ class GenerateDateChunksTest(unittest.TestCase):
             self.assertEqual(check[0]+1, len(output))
 
 class GenerateTokenTests(unittest.TestCase):
-
     test_user_1 = 'test@gmail.com'
     test_user_2 = 'fake2@fake.com'
     test_password_1 = 'test'

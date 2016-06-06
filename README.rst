@@ -14,7 +14,7 @@ The target audience for this package are is in-house or agency data teams that n
 Acknowledgements
 ----------------
 
-This library is an adapted version of [TwitterAds](https://github.com/essence-tech/twitter-ads-api), which I found to be a great model for building connectors to various Advertising API's. 
+This library is an adapted version of TwitterAds, which I found to be a great model for building connectors to various Advertising API's. 
 
 
 
