@@ -18,7 +18,7 @@ def get_timeranges():
 	"""Retrieves available time ranges for given data source.
 
 	Endpoint:
-	/sites/:siteId/datasources/componentplacementstimeRanges
+	/sites/:siteId/datasources/componentplacements/timeRanges
 	"""
 	
 	required_fields = {'source':'componentplacements'}
@@ -30,7 +30,7 @@ def get_attributes():
 	"""Retrieves available attributes for given data source.
 
 	Endpoint:
-	/sites/:siteId/datasources/componentplacementsattributes
+	/sites/:siteId/datasources/componentplacements/attributes
 	"""
 	
 	required_fields = {'source':'componentplacements'}
@@ -42,7 +42,7 @@ def get_metrics():
 	"""Retrieves available metrics for given data source.
 
 	Endpoint:
-	/sites/:siteId/datasources/componentplacementsmetrics
+	/sites/:siteId/datasources/componentplacements/metrics
 	"""
 	
 	required_fields = {'source':'componentplacements'}
@@ -54,7 +54,7 @@ def get_view(view, depth=0):
 	"""Retrieves data for a specific view id. 
 
 	Endpoint:
-	/sites/:siteId/datasources/componentplacementsviews/:viewId
+	/sites/:siteId/datasources/componentplacements/views/:viewId
 	:param view: str, view id of created view
 	:param depth: int, dimensions depth of data
 	"""
@@ -62,6 +62,13 @@ def get_view(view, depth=0):
 	required_fields = {'source':'componentplacements','view':view}
 	parameters = {'depth':depth}
 	response = PreparedRequest('view', required_fields, parameters).send()
+
+	# The fbSpend field returns string integers with comma separator.
+	# The commas need to be removed to perform operations on them.
+
+	if response.data[0]['fbSpend']: 
+		for record in response.data:
+			record['fbSpend'] = record['fbSpend'].replace(',','')
 		
 	return response
 
@@ -69,7 +76,7 @@ def get_stats(attributes=None, metrics=None, start=None, end=None, depth=0):
 	"""Retrieves specific data requested given set of parameters.
 
 	Endpoint:
-	/sites/:siteId/datasources/componentplacementsviews/adhoc
+	/sites/:siteId/datasources/componentplacements/views/adhoc
 	
 	:param attributes: list/str, attributes fields 
 	:param metrics: list/str, metrics fields
@@ -102,7 +109,14 @@ def get_stats(attributes=None, metrics=None, start=None, end=None, depth=0):
 					  'end':day,
 					  'depth':depth}
 		request = PreparedRequest('adhoc', required_fields, parameters)
-		response += request.send()
+		record = request.send()
+
+		# The fbSpend field returns string integers with comma separator.
+		# The commas need to be removed to perform operations on them.
+
+		if record.data['fbSpend']:
+			record.data['fbSpend'] = record.data['fbSpend'].replace(',','')
+		response += record
 		if response.errors:
 			break
 
