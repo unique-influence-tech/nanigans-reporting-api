@@ -64,11 +64,10 @@ def get_view(view, depth=0):
 	parameters = {'depth':depth}
 	response = PreparedRequest('view', required_fields, parameters).send()
 
-	# The fbSpend field returns string integers with comma separator.
-	# The commas need to be removed to perform operations on them.
+	# Remove commas from fbSpend value
 
-	if response[0]['fbSpend']: 
-		for record in response:
+	if response.data[0].get('fbSpend'): 
+		for record in response.data:
 			record['fbSpend'] = record['fbSpend'].replace(',','')
 
 	return response
@@ -112,11 +111,11 @@ def get_stats(attributes=None, metrics=None, start=None, end=None, depth=0):
 		request = PreparedRequest('adhoc', required_fields, parameters)
 		record = request.send()
 
-		# The fbSpend field returns string integers with comma separator.
-		# The commas need to be removed to perform operations on them.
-		
-		if record.data['fbSpend']:
+		# Remove commas from fbSpend value
+
+		if record.data.get('fbSpend'):
 			record.data['fbSpend'] = record.data['fbSpend'].replace(',','')
+			
 		response += record
 		if response.errors:
 			break
