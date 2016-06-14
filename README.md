@@ -98,7 +98,7 @@ True
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
-#### The Depth Parameter
+## The Depth Parameter
 
 All requests will require a depth parameter. The depth parameter tells you the level of depth you want the request to return. This is dependent on the relationship between the dimensions. By default, this parameter is zero. 
 
