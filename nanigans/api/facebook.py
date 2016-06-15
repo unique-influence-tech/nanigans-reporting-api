@@ -72,9 +72,10 @@ def get_view(view, depth=0):
 
 	# Remove commas from fbSpend value
 
-	if response.data[0].get('fbSpend'): 
-		for record in response.data:
-			record['fbSpend'] = record['fbSpend'].replace(',','')
+	if response.ok: 
+		if response.data[0].get('fbSpend'): 
+			for record in response.data:
+				record['fbSpend'] = record['fbSpend'].replace(',','')
 
 	return response
 
@@ -120,9 +121,9 @@ def get_stats(attributes=None, metrics=None, start=None, end=None, depth=0):
 
 		# Remove commas from fbSpend value
 
-		if record.data.get('fbSpend'):
-			record.data['fbSpend'] = record.data['fbSpend'].replace(',','')
-			
+		if response.ok:
+			if record.data.get('fbSpend'):
+				record.data['fbSpend'] = record.data['fbSpend'].replace(',','')
 		response += record
 		if response.errors:
 			break
