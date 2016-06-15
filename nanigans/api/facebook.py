@@ -1,5 +1,5 @@
 """
-The .api.facebbok module contains the core methods used to retrieve data from native Facebook 
+The facebook module contains the core methods used to retrieve data from native Facebook 
 ads data from Nanigans:
 
 	.get_timeranges:: used to retrieve built-in time range for data sources
@@ -13,7 +13,6 @@ ads data from Nanigans:
 from datetime import date, timedelta
 from ..utils import generate_dates
 from ..models import PreparedRequest, Response
-
 
 def get_timeranges():
 	"""Retrieves available time ranges for given data source.

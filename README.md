@@ -14,12 +14,12 @@ Start making requests:
 
 ```python
 >>> import nanigans
->>> view = nanigans.facebook.get_stats()
->>> view.ok
+>>> stats = nanigans.facebook.get_stats()
+>>> stats.ok
 True
->>> print(view)
+>>> print(stats)
 <Nanigans Response [OK]>
->>> view.data
+>>> stats.data
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
@@ -54,12 +54,12 @@ You can also switch **site ids** by reassigning the credentials:
 Start making requests:
 
 ```python
->>> view = nanigans.facebook.get_stats()
->>> view.ok
+>>> stats = nanigans.facebook.get_stats()
+>>> stats.ok
 True
->>> print(view)
+>>> print(stats)
 <Nanigans Response [OK]>
->>> view.data
+>>> stats.data
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
@@ -67,34 +67,34 @@ True
 
 #### Facebook Native
 ```python
->>> view = nanigans.facebook.get_stats()
->>> view.ok
+>>> stats = nanigans.facebook.get_stats()
+>>> stats.ok
 True
->>> print(view)
+>>> print(stats)
 <Nanigans Response [OK]>
->>> view.data
+>>> stats.data
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
 #### Multichannel (e.g. Twitter, Instagram, Facebook)
 ```python
->>> view = nanigans.multichannel.get_stats()
->>> view.ok
+>>> stats = nanigans.multichannel.get_stats()
+>>> stats.ok
 True
->>> print(view)
+>>> print(stats)
 <Nanigans Response [OK]>
->>> view.data
+>>> stats.data
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
 #### Publishers (e.g. MoPub)
 ```python
->>> view = nanigans.publisher.get_stats()
->>> view.ok
+>>> stats = nanigans.publisher.get_stats()
+>>> stats.ok
 True
->>> print(view)
+>>> print(stats)
 <Nanigans Response [OK]>
->>> view.data
+>>> stats.data
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
@@ -104,8 +104,8 @@ All requests will require a depth parameter. The depth parameter tells you the l
 
 ```python
 >>> import nanigans
->>> view = nanigans.multichannel.get_view('xxxxxxx', depth=0)
->>> view.data[0]
+>>> stats = nanigans.multichannel.get_stats('xxxxxxx', depth=0)
+>>> stats.data[0]
 {'actions_3': '639', 
 'linkClickRaw28dClick': '28337', 
 'fbSpend': '33150.39', 
@@ -114,8 +114,8 @@ All requests will require a depth parameter. The depth parameter tells you the l
 'impressions': '4383246', 
 'actions_6': '10780', 
 'actions_7': '968'}
->>> view = nanigans.multichannel.get_view('xxxxxxx', depth=6)
->>> view.data[0]
+>>> stats = nanigans.multichannel.get_stats('xxxxxxx', depth=6)
+>>> stats.data[0]
 {'context': 'FakeContext',
  'date': '2016/06/06',
  'audience': 'Github Users',
