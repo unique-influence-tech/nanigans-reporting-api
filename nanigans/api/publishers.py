@@ -113,13 +113,14 @@ def get_stats(attributes=None, metrics=None, start=None, end=None, depth=0):
 		record = request.send()
 
 		# Remove commas from fbSpend value
-		
-		if response.ok:
-			if record.data.get('fbSpend'):
-				record.data['fbSpend'] = record.data['fbSpend'].replace(',','')
+
+		if record.ok:
+			if record.data[0].get('fbSpend'):
+				record.data[0]['fbSpend'] = record.data[0]['fbSpend'].replace(',','')
 		response += record
 		if response.errors:
 			break
+
 
 	return response 
 

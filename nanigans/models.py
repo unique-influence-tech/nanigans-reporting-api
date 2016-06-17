@@ -132,7 +132,7 @@ class Adapter(object):
 			return self._datasource_endpoint.format(NAN_CONFIG['site'],\
 				self.request.required_fields['source'])
 		if self.request.resource == 'events':
-			return self._events_endpoint
+			return self._events_endpoint.format(NAN_CONFIG['site'])
 		raise TypeError('Do not recognize resource.')
 	
 	@property
@@ -173,7 +173,7 @@ class Response(object):
             return True
         return False
 
-    def __bool__(self):
+    def __bool__(self):	
         return self.ok
 
     def __repr__(self):
