@@ -46,10 +46,10 @@ if not temp_config['site']:
 		temp_config['password'], 
 		temp_config['site']
 	)
-	from .api import facebook, multichannel, publishers
+	from .api import facebook, multichannel, publishers, events
 	del site
 else:
-	from .api import facebook, multichannel, publishers
+	from .api import facebook, multichannel, publishers, events
 	temp_config['token'] = generate_token(
 		temp_config['username'], 
 		temp_config['password'], 

@@ -1,5 +1,5 @@
 """
-The facebook module contains the core methods used to retrieve data from native Facebook 
+The facebook module contains the core functions used to retrieve data from native Facebook 
 ads data from Nanigans:
 
 	.get_timeranges:: used to retrieve built-in time range for data sources

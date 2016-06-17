@@ -1,5 +1,5 @@
 """
-The multichannel module contains the core methods used to retrieve multi-channel data from Nanigans
+The multichannel module contains the core functions used to retrieve multi-channel data from Nanigans
 (e.g. Twitter, Instagram, Facebook):
 
 	.get_timeranges:: used to retrieve built-in time range for data sources

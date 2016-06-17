@@ -1,5 +1,5 @@
 """
-The publishers module contains the core methods used to retrieve publisher data from Nanigans 
+The publishers module contains the core functions used to retrieve publisher data from Nanigans 
 (e.g. MoPub):
 
 	.get_timeranges:: used to retrieve built-in time range for data sources
