@@ -1,6 +1,5 @@
 """
-The publishers module contains the core functions used to retrieve publisher data from Nanigans 
-(e.g. MoPub):
+The publishers module contains the core functions used to retrieve publisher data (e.g. MoPub):
 
 	.get_timeranges:: used to retrieve built-in time range for data sources
 	.get_attributes:: used to retrieve all dimensions available for data source
@@ -9,10 +8,9 @@ The publishers module contains the core functions used to retrieve publisher dat
 	.get_stats:: used to retrieve data for user-defined queries
 
 """
-
 from datetime import date, timedelta
-from ..utils import generate_dates
-from ..models import PreparedRequest, Response
+from nanigans.utils import generate_dates
+from nanigans.models import PreparedRequest, Response
 
 def get_timeranges():
 	"""Retrieves available time ranges for given data source.
@@ -20,7 +18,6 @@ def get_timeranges():
 	Endpoint:
 	/sites/:siteId/datasources/componentpublishers/timeRanges
 	"""
-	
 	required_fields = {'source':'componentpublishers'}
 	response = PreparedRequest('timeranges', required_fields).send()
 
@@ -32,7 +29,6 @@ def get_attributes():
 	Endpoint:
 	/sites/:siteId/datasources/componentpublishers/attributes
 	"""
-	
 	required_fields = {'source':'componentpublishers'}
 	response = PreparedRequest('attributes', required_fields).send()
 
@@ -44,7 +40,6 @@ def get_metrics():
 	Endpoint:
 	/sites/:siteId/datasources/componentpublishers/metrics
 	"""
-	
 	required_fields = {'source':'componentpublishers'}
 	response = PreparedRequest('metrics', required_fields).send()
 
@@ -59,7 +54,6 @@ def get_view(view, depth=0):
 	:param view: str, view id of created view
 	:param format: str, json
 	"""
-
 	required_fields = {'source':'componentpublishers','view':view}
 	parameters = {'depth':depth}
 	response = PreparedRequest('view', required_fields, parameters).send()
@@ -85,7 +79,6 @@ def get_stats(attributes=None, metrics=None, start=None, end=None, depth=0):
 	:param end: str, end date in %Y-%m-%d format 
 	:param depth: int, dimensions depth of data
 	"""
-
 	if isinstance(metrics, str):
 		metrics = [metrics]
 	if not metrics:
@@ -120,7 +113,6 @@ def get_stats(attributes=None, metrics=None, start=None, end=None, depth=0):
 		response += record
 		if response.errors:
 			break
-
 
 	return response 
 

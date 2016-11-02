@@ -1,8 +1,11 @@
+"""
+Utilities used throughout package. 
+"""
 import base64
 import requests
 
-from .config import NAN_CONFIG as config
 from datetime import datetime, timedelta
+from nanigans.object import Credentials
 
 def generate_dates(start, end):
 	"""Generates a list of string dates up to but not including 
@@ -25,6 +28,7 @@ def generate_dates(start, end):
 
 	return dates
 
+
 def generate_date_chunks(start, end, size):
 	"""Generator to pass start and end dates given a start, end
 	and length of date range. 
@@ -40,6 +44,7 @@ def generate_date_chunks(start, end, size):
 			yield (dates[i], dates[i+size])
 		except IndexError:
 			yield (dates[i], dates[len(dates)-1])
+
 
 def generate_token(user, password, site):
 	"""Generate access token.
@@ -61,19 +66,59 @@ def generate_token(user, password, site):
 
 	return resp_json['token']
 
-def reassign(site):
-	"""Re assign site id and access token.
+
+def change_site_id(site, obj=Credentials()):
+	"""Change site id and access token.
 
 	:params site: str/int, Nanigans site id
 	"""
-	config['site'] = str(site)
-	config['token'] = generate_token(
-		config['username'], 
-		config['password'], 
-		config['site']
+	obj.credentials['site'] = str(site)
+	obj.credentials['token'] = generate_token(
+		obj.credentials['username'], 
+		obj.credentials['password'], 
+		obj.credentials['site']
 	)
 
-	return 
+	return
+
+def set_default_config(username, password, site, obj=Credentials()):
+	""" Set default configuration.
+	
+	:params user: str, email used to access Nanigans account
+	:params password: str, password 
+	:params site: str, site id in Nanigans
+	"""
+	config = {}
+
+	config['username'] = username
+	config['password'] = password
+	config['site'] = site 
+	config['token'] = generate_token(
+					  username, password, site)
+
+	obj._credentials = config
+
+	return
+
+	
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

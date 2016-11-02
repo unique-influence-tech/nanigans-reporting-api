@@ -1,16 +1,13 @@
 """
-The events module contains 2 functions to acccess event data:
+The events module contains 2 functions to access event data:
 
 	.get_time_of_click:: retrieves event level data attributed to time of click
 	.get_time_of_conversion:: retrieves event level data attributed to time of conversion
 
 """
-
-
 from datetime import date, timedelta
-from ..utils import generate_dates
-from ..models import PreparedRequest, Response
-
+from nanigans.utils import generate_dates
+from nanigans.models import PreparedRequest, Response
 
 def get_time_of_click(fields=None, start=None, end=None):
 	"""Retrieves specific events given set of parameters. The events 
@@ -23,7 +20,6 @@ def get_time_of_click(fields=None, start=None, end=None):
 	:param start: str, start date in %Y-%m-%d format 
 	:param end: str, end date in %Y-%m-%d format 
 	"""
-
 	if isinstance(fields, str):
 		fields = [fields]
 
@@ -61,7 +57,6 @@ def get_time_of_conversion(fields=None, start=None, end=None):
 	:param start: str, start date in %Y-%m-%d format 
 	:param end: str, end date in %Y-%m-%d format 
 	"""
-
 	if isinstance(fields, str):
 		fields = [fields]
 

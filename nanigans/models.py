@@ -1,7 +1,10 @@
+"""
+Core models used for accessing Nanigans ads server(s).
+"""
 import requests
 
-from .config import NAN_CONFIG
-from .structures import StringDescriptor, DictDescriptor, ListDescriptor
+from nanigans import auth
+from nanigans.structures import StringDescriptor, DictDescriptor, ListDescriptor
 
 class PreparedRequest(object):
 	"""The '<Nanigans Prepared Request [resource]>' object is used to send a
@@ -36,7 +39,6 @@ class PreparedRequest(object):
 	filters = DictDescriptor()
 	
 	def __init__(self, resource, required_fields, parameters=None, filters=None):
-
 		self.resource = resource
 		self.required_fields = required_fields 		
 		self.filters = filters if filters else {}
@@ -51,7 +53,7 @@ class PreparedRequest(object):
 	
 
 class Adapter(object):
-	"""' The <Nanigans Adapter [Reporting API]>' object is responsible for 
+	"""The '<Nanigans Adapter [Reporting API]>' object is responsible for 
 	managing requests to the Nanigans API 2.0. 
 
 	The get method is written uniquely to handle Nanigans API 2.0 success
@@ -83,7 +85,7 @@ class Adapter(object):
 		self._errors = []
 
 		# Required parameters that don't need to be repeatedly called in .parameters
-		self.request.parameters['access_token'] = NAN_CONFIG['token']
+		self.request.parameters['access_token'] = auth.credentials['token']
 		self.request.parameters['format'] = 'json' 
 		if self.request.resource == 'adhoc':
 			self.request.parameters['timeRange'] = 'custom'
@@ -114,25 +116,25 @@ class Adapter(object):
 	@property
 	def endpoint(self):
 		if self.request.resource == 'view':
-			return self._views_endpoint.format(NAN_CONFIG['site'],\
+			return self._views_endpoint.format(auth.credentials['site'],\
 				self.request.required_fields['source'], self.request.required_fields['view'])
 		if self.request.resource == 'adhoc':
-			return self._adhoc_endpoint.format(NAN_CONFIG['site'],\
+			return self._adhoc_endpoint.format(auth.credentials['site'],\
 				self.request.required_fields['source'])
 		if self.request.resource == 'attributes':
-			return self._attrs_endpoint.format(NAN_CONFIG['site'],\
+			return self._attrs_endpoint.format(auth.credentials['site'],\
 				self.request.required_fields['source'])
 		if self.request.resource == 'metrics':
-			return self._metrics_endpoint.format(NAN_CONFIG['site'],\
+			return self._metrics_endpoint.format(auth.credentials['site'],\
 				self.request.required_fields['source'])
 		if self.request.resource == 'timeranges':
-			return self._timeranges_endpoint.format(NAN_CONFIG['site'],\
+			return self._timeranges_endpoint.format(auth.credentials['site'],\
 				self.request.required_fields['source'])
 		if self.request.resource == 'datasources':
-			return self._datasource_endpoint.format(NAN_CONFIG['site'],\
+			return self._datasource_endpoint.format(auth.credentials['site'],\
 				self.request.required_fields['source'])
 		if self.request.resource == 'events':
-			return self._events_endpoint.format(NAN_CONFIG['site'])
+			return self._events_endpoint.format(auth.credentials['site'])
 		raise TypeError('Do not recognize resource.')
 	
 	@property

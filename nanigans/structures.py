@@ -1,3 +1,6 @@
+"""
+Descriptors used in the models.py module.
+"""
 from weakref import WeakKeyDictionary
 
 class BaseDescriptor(object):
@@ -10,7 +13,7 @@ class BaseDescriptor(object):
 
  
 class StringDescriptor(BaseDescriptor):
-
+    
     def __init__(self):
         super(StringDescriptor, self).__init__()
 

@@ -1,7 +1,4 @@
 
-NAN_CONFIG = {'site':'',
-			 'username':'',
-			 'password':''}
-
+AUTH = {'site':'', 'username':'', 'password':''}
 
 

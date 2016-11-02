@@ -33,30 +33,11 @@ Get Publishers data:
 True
 
 """
+from nanigans.utils import Credentials, set_default_config, change_site_id
 
-from .utils import generate_token, reassign
-from .config import NAN_CONFIG as temp_config
+auth = Credentials()
 
-if not temp_config['site']:
-	print('Add your site id:')
-	site = str(input())
-	temp_config['site'] = site
-	temp_config['token'] = generate_token(
-		temp_config['username'], 
-		temp_config['password'], 
-		temp_config['site']
-	)
-	from .api import facebook, multichannel, publishers, events
-	del site
-else:
-	from .api import facebook, multichannel, publishers, events
-	temp_config['token'] = generate_token(
-		temp_config['username'], 
-		temp_config['password'], 
-		temp_config['site']
-	)
-del generate_token
-del temp_config
+from nanigans.api import facebook, multichannel, publishers, events
 
 
 

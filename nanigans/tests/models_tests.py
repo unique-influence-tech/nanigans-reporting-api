@@ -1,7 +1,9 @@
 import unittest
 
 from mock import Mock, MagicMock, patch
-from ..models import PreparedRequest, Adapter, Response
+from nanigans.utils import set_default_config
+from nanigans.object import Credentials
+from nanigans.models import PreparedRequest, Adapter, Response
 
 
 class RequestTests(unittest.TestCase):
@@ -25,8 +27,11 @@ class RequestTests(unittest.TestCase):
         self.assertTrue(hasattr(request, 'send'))
 
     def test_request_assigns_attributes_correctly_on_instantiation(self):
-        request = PreparedRequest(resource=self.foo_string, required_fields=self.bar_dict, 
-                                  parameters=self.foo_dict)
+        request = PreparedRequest(
+            resource=self.foo_string, 
+            required_fields=self.bar_dict, 
+            parameters=self.foo_dict
+        )
         self.assertEquals(self.foo_string, request.resource)
         self.assertEquals(self.bar_dict, request.required_fields)
         self.assertEquals(self.foo_dict, request.parameters)
@@ -67,18 +72,17 @@ class RequestTests(unittest.TestCase):
             with self.assertRaises(TypeError):
                 request.parameters = non_dict
 
-    def test_send_method_calls_adapter_get_method(self):
-        with patch.object(PreparedRequest, 'send', return_value=None) as request_send:
-            request = PreparedRequest(resource=self.foo_string, required_fields=self.bar_dict)
-            request.send()
-        request_send.assert_called_once_with()
+    @patch.object(PreparedRequest, 'send', return_value=None)
+    def test_send_method_calls_adapter_get_method(self, mock_request):
+        request = PreparedRequest(resource=self.foo_string, required_fields=self.bar_dict)
+        request.send()
+        mock_request.assert_called_once_with()
 
-    def test_send_method_returns_response_object(self):
-        with patch.object(Adapter, 'get', return_value=Response()) as adapter_send:
-            print(adapter_send)
-            #request = PreparedRequest(resource=self.foo_string, required_fields=self.bar_dict)
-            #dapter = Adapter(request).adapter_send()
-        #self.assertIsInstance(response, Response)
+    @patch.object(PreparedRequest, 'send', return_value=Response())
+    def test_send_method_returns_response_object(self, mock_request):
+        request = PreparedRequest(resource=self.foo_string, required_fields=self.bar_dict)
+        test_response = request.send()
+        self.assertIsInstance(test_response, Response)
 
     def test_repr_outputs_as_intended(self):
         request = PreparedRequest(resource=self.foo_string, required_fields=self.bar_dict)
@@ -277,6 +281,13 @@ class ResponseTests(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    
+    test_user = 'username@fakers.com'
+    test_password = 'fakePass5000'
+    test_site = 123456
+    auth = Credentials()
+    set_default_config(test_user, test_password, test_site)
+
     test_cases = [RequestTests, AdapterTests, ResponseTests]
 
     for test_case in test_cases:

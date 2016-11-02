@@ -3,8 +3,9 @@ import re
 
 from random import randint
 from datetime import datetime
-from ..config import NAN_CONFIG as config 
-from ..utils import generate_date_chunks, generate_dates, generate_token, reassign
+from nanigans.object import Credentials
+from nanigans.utils import (generate_date_chunks, generate_dates, 
+                            generate_token, change_site_id, set_default_config)
 
 
 class GenerateDateRangeTests(unittest.TestCase):
@@ -89,6 +90,7 @@ class GenerateDateChunksTest(unittest.TestCase):
             self.assertEqual(check[0]+1, len(output))
 
 class GenerateTokenTests(unittest.TestCase):
+    config = Credentials()
     test_user_1 = 'test@gmail.com'
     test_user_2 = 'fake2@fake.com'
     test_password_1 = 'test'
@@ -110,23 +112,27 @@ class GenerateTokenTests(unittest.TestCase):
         self.assertIsNotNone(expr.match(token1))
         self.assertIsNone(expr.match(token2))
 
-class ReassignTests(unittest.TestCase):
+class ChangeSiteIdTests(unittest.TestCase):
+    config = Credentials()
+    test_user= 'test@gmail.com'
+    test_password = 'test'
+    test_site = '456789'
+    set_default_config(test_user, test_password, test_site)
     site = randint(10000, 99999)
     
     def test_reassign_changes_site(self):
-        before = config['site']
-        reassign(self.site)
-        after = config['site']
-        self.assertFalse(before==after)
-
-    def test_reassign_changes_token(self):
-        before = config['token']
-        reassign(self.site)
-        after = config['token']
+        before = self.config.credentials['site']
+        change_site_id(self.site)
+        after = self.config.credentials['site']
         self.assertFalse(before==after)
 
 if __name__ == "__main__":
-    test_cases = [GenerateDateRangeTests, GenerateDateChunksTest, GenerateTokenTests, ReassignTests]
+    test_cases = [
+        GenerateDateRangeTests, 
+        GenerateDateChunksTest, 
+        GenerateTokenTests, 
+        ChangeSiteIdTests
+    ]
     for test_case in test_cases:
         suite = unittest.TestLoader().loadTestsFromTestCase(test_case)
         unittest.TextTestRunner(verbosity=5).run(suite)
