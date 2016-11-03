@@ -8,7 +8,7 @@
 Welcome to NanStats. A python adapter for the Nanigans Reporting API. 
 
 Basic Usage:
-
+g
 >>> import nanigans
 >>> stats = nanigans.facebook.get_stats()
 >>> stats.ok

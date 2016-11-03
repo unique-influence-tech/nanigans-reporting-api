@@ -124,7 +124,19 @@ All requests will require a depth parameter. The depth parameter tells you the l
  'linkClickRaw28dClick': '451'}
 ```
 
+## Testing
+
+To test, run one of the following:
+
+```
+python -m nanigans.api_tests
+python -m nanigans.models_tests
+python -m nanigans.structures_tests
+python -m nanigans.utils_tests
+```
+
+
 ## Acknowledgements
 
-This library is an adapted version of other request-response based interfaces.
+This library is an adapted version of other request-response based interfaces (e.g. [TwitterAds](https://github.com/essence-tech/twitter-ads-api), [Requests](https://github.com/kennethreitz/requests)).
 

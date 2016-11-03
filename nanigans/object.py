@@ -16,3 +16,9 @@ class Credentials(object):
     
     def __repr__(self):
         return "<[Credentials Object]>"
+
+    def __str__(self):
+        if self._credentials:
+            return "<Credentials Object [Signed]>"
+        else:
+            return "<Credentials Object [Unsigned]>"
