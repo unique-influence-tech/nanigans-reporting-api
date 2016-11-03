@@ -4,13 +4,30 @@ Welcome to NanStats; a Python adapter for the Nanigans Reporting API.
 
 ## Basic Usage
 
-If you're managing a single site:
 
-* Add **username** to config
-* Add **password** to config
-* Add **site id** to config
+**Add Credentials:**
 
-Start making requests:
+You can use the *set_default_config in Python environment.
+
+```python
+>>> import nanigans
+>>> nanigans.auth.credentials == None
+True
+>>> nanigans.set_default_config('xxxxxxxx', 'xxxxxxxx', 123456)
+>>> nanigans.auth.credentials
+{'token': 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 'username': 'xxxxxxxx', 'password': 'xxxxxxxx', 'site': 123456}
+```
+
+OR 
+
+You can edit the config.py file to set default values.
+
+* Add **username** to config.py
+* Add **password** to config.py
+* Add **site** to config.py
+
+
+**Start making requests:**
 
 ```python
 >>> import nanigans
@@ -23,47 +40,17 @@ True
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
-## Multiple Site Usage 
+You can also switch **sites** by regenerating credentials:
 
-If you're managing multiple sites:
-
-* Add **username** to config
-* Add **password** to config
-
-You'll have the option to leave the **site id** blank or provide a default value.
-
-If you leave the **site id** blank in the config, you'll be asked to provide one:
-
-```python
->>> import nanigans
-Add your site id:
-XXXXXXX
 ```
-
-You can also switch **site ids** by reassigning the credentials:
-
-```python
->>> import nanigans
->>> nanigans.config.NAN_CONFIG
-{'username': 'fake@fake.com', 'token': u'fakeaccesstoken', 'password': 'pass', 'site': '123456'}
->>> nanigans.reassign(123457)
->>> nanigans.config.NAN_CONFIG
-{'username': 'fake@fake.com', 'token': u'fakeaccesstoken', 'password': 'pass', 'site': '123457'}
-```
-
-Start making requests:
-
-```python
->>> stats = nanigans.facebook.get_stats()
->>> stats.ok
-True
->>> print(stats)
-<Nanigans Response [OK]>
->>> stats.data
-[{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
+>>> nanigans.auth.credentials
+{'token': 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 'username': 'xxxxxxxx', 'password': 'xxxxxxxx', 'site': 123456}
+>>> nanigans.change_site_id(987654)
+{'token': 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', 'username': 'xxxxxxxx', 'password': 'xxxxxxxx', 'site': 987654}
 ```
 
 ## Access Facebook, Multichannel and Publisher Data
+
 
 #### Facebook Native
 ```python
@@ -76,6 +63,7 @@ True
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
+
 #### Multichannel (e.g. Twitter, Instagram, Facebook)
 ```python
 >>> stats = nanigans.multichannel.get_stats()
@@ -87,6 +75,7 @@ True
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
 
+
 #### Publishers (e.g. MoPub)
 ```python
 >>> stats = nanigans.publisher.get_stats()
@@ -97,6 +86,7 @@ True
 >>> stats.data
 [{'date': '2016-05-09', 'impressions': '0', 'clicks':'0', 'fbSpend':'0.00', 'budgetPool': 'A'},...]
 ```
+
 
 ## The Depth Parameter
 
@@ -117,14 +107,14 @@ All requests will require a depth parameter. The depth parameter tells you the l
 >>> stats = nanigans.multichannel.get_stats('xxxxxxx', depth=6)
 >>> stats.data[0]
 {'context': 'FakeContext',
- 'date': '2016/06/06',
+ 'date': '2016-06-06',
  'audience': 'Github Users',
  'budgetPool': 'US',
  'fbSpend': '1235.34',
  'actions_1': '15',
  'actions_13': '451',
  'ad': 'FakeAd',
- 'placementId': xxxxxxxxxx, 
+ 'placementId': '123456789', 
  'actions_3': '8',
  'actions_7': '37',
  'strategyGroup': 'FakeStrategyGroup',
@@ -136,6 +126,5 @@ All requests will require a depth parameter. The depth parameter tells you the l
 
 ## Acknowledgements
 
-This library is an adapted version of [TwitterAds](https://github.com/essence-tech/twitter-ads-api), which I found to be a great model for building connectors to various Advertising API's. 
-
+This library is an adapted version of other request-response based interfaces.
 

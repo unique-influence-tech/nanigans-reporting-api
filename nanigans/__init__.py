@@ -33,9 +33,14 @@ Get Publishers data:
 True
 
 """
-from nanigans.utils import Credentials, set_default_config, change_site_id
+from nanigans.utils import Credentials, set_default_config, change_site_id, generate_token
 
 auth = Credentials()
+
+if auth.credentials:
+    auth.credentials['token'] = generate_token(auth.credentials['username'], 
+                                               auth.credentials['password'],
+                                               auth.credentials['site'])
 
 from nanigans.api import facebook, multichannel, publishers, events
 
