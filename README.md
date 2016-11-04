@@ -12,7 +12,7 @@ pip install nanstats
 
 **Add Credentials:**
 
-You can use the *set_default_config in Python environment.
+You can use the **nanigans.set_default_config** in a live Python environment.
 
 ```python
 >>> import nanigans
@@ -25,7 +25,7 @@ True
 
 OR 
 
-You can edit the config.py file to set default values.
+You can edit the **config.py** file to set default values.
 
 * Add **username** to config.py
 * Add **password** to config.py
