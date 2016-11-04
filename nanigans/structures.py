@@ -1,5 +1,7 @@
 """
 Descriptors used in the models.py module.
+
+Credit: https://github.com/essence-tech/twitter-ads-api/blob/master/twitter/structures.py
 """
 from weakref import WeakKeyDictionary
 

@@ -2,8 +2,13 @@
 
 Welcome to NanStats; a Python adapter for the Nanigans Reporting API. 
 
-## Basic Usage
+## Getting Started
 
+```
+pip install nanstats
+```
+
+## Basic Usage
 
 **Add Credentials:**
 
@@ -90,7 +95,7 @@ True
 
 ## The Depth Parameter
 
-All requests will require a depth parameter. The depth parameter tells you the level of depth you want the request to return. This is dependent on the relationship between the dimensions. By default, this parameter is zero. 
+All requests will require a depth parameter. This tells you how many dimensions you want each row to return. This is dependent on the relationship between the dimensions.
 
 ```python
 >>> import nanigans

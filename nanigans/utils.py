@@ -1,11 +1,11 @@
 """
-Utilities used throughout package. 
+Utilities used throughout package.
 """
 import base64
 import requests
 
 from datetime import datetime, timedelta
-from nanigans.object import Credentials
+from nanigans.auth import Credentials
 
 def generate_dates(start, end):
 	"""Generates a list of string dates up to but not including 
