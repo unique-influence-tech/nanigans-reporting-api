@@ -12,7 +12,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='NanStats',
-    version='0.0.0',
+    version='0.0.1',
     description='A Python adapter for the Nanigans Reporting API.',
     long_description=long_description,
     url='https://github.com/unique-influence-tech/nanigans-reporting-api',
