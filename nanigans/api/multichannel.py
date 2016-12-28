@@ -64,6 +64,7 @@ def get_view(view, depth=0):
 		if response.data[0].get('fbSpend'): 
 			for record in response.data:
 				record['fbSpend'] = record['fbSpend'].replace(',','')
+				record['date'] = record['date'].replace('/','-')
 		
 	return response
 

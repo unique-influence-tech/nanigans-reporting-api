@@ -1,5 +1,6 @@
 """
 Core models used for accessing Nanigans ads server(s).
+
 """
 import requests
 
@@ -32,6 +33,8 @@ class PreparedRequest(object):
 	:param parameters: dict, attributes, metrics, time range, etc.
 	:param filters: dict, similar to parameters will act to limit fields
 
+    Credit:
+    https://github.com/essence-tech/twitter-ads-api/blob/master/twitter/models.py
 	"""
 	resource = StringDescriptor()
 	parameters = DictDescriptor()
@@ -56,18 +59,15 @@ class Adapter(object):
 	"""The '<Nanigans Adapter [Reporting API]>' object is responsible for 
 	managing requests to the Nanigans API 2.0. 
 
-	The get method is written uniquely to handle Nanigans API 2.0 success
-	and error responses. This primarily means 2 things.
-
-	Successful requests that retrieve data -- requests to the adhoc and events
-	endpoints -- no date is returned. Thus, I have to add in date to each JSON object
-	returned. 
+	The get method is written to handle simple requests to various endpoints. The events
+    and adhoc endpoints require that I add dates since these can only be queried one day 
+    at a time. All other endpoints do not require dates or have them included in the response
+    data.
 	
 	All requests will return an HTTP status of 200. Thus to handle errors, I have to 
 	either find the error message in the response or process the request text. 
 
 	:param PreparedRequest: list, the entities provided by the resource.
-
 	"""
 	_base_endpoint = 'https://app.nanigans.com/reporting-api/sites/{0}'
 	_base_datasource_endpoint = _base_endpoint+'/datasources'
@@ -146,9 +146,7 @@ class Adapter(object):
 
 
 class Response(object):
-    """ A '<Nanigans Response [status]>' object.
-
-    The '<Nanigans Response [status]>' object is a carrier of information
+    """ The '<Nanigans Response [status]>' object is a carrier of information
     returned by the adapter. It should only need to be instantiated by the
     adapter.
 
@@ -161,6 +159,8 @@ class Response(object):
     :param errors: dict, any failed requests whilist gathering the resource
     entities.
 
+    Credit:
+    https://github.com/essence-tech/twitter-ads-api/blob/master/twitter/models.py
     """
     data = ListDescriptor()
     errors = ListDescriptor()

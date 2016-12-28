@@ -95,11 +95,16 @@ True
 
 ## The Depth Parameter
 
-All requests will require a depth parameter. This tells you how many dimensions you want each row to return. This is dependent on the relationship between the dimensions.
+A saved view in Nanigans can contain hierarchies of attributes. Depth allows you to drill down deeper into your
+aggregations. 
+
+When querying a saved view, `depth=1` returns a top-level summary, `depth=2` returns a drill down into the first listed attribute set, `depth=3` returns a drill down into the second list attribute set etc.
+
+In the example below I have 6 different attributes, see the difference from `depth=1` to `depth=6`:
 
 ```python
 >>> import nanigans
->>> stats = nanigans.multichannel.get_stats('xxxxxxx', depth=0)
+>>> stats = nanigans.multichannel.get_stats('xxxxxxx', depth=1)
 >>> stats.data[0]
 {'actions_3': '639', 
 'linkClickRaw28dClick': '28337', 
